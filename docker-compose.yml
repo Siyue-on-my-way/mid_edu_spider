@@ -1,0 +1,31 @@
+# development       -> docker-compose up
+# production        -> docker-compose up
+# local simulation  -> docker-compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.override.local.yml up
+
+# set DOCKER_REGISTRY, TAG_VERSION, PIP_INDEX in .env
+
+version: '2' 
+
+
+services:
+  ############################################################################################
+  # edu-proxy
+  #
+  #
+  ############################################################################################
+  edu-proxy:
+    build:  # 这里需要build镜像，所以需要执行
+      context: .
+      args:
+        - name=value
+    container_name: mid-server-edu-container
+    ports:
+      - 8889:8889
+    volumes:
+      - ./:/code/
+    # command: bash -c "python3 main.py"  # 把运行命令放到dockerfile里试试
+
+## 先run:  docker-compose build 
+## 再run: docker-compose up -d
+
+  
